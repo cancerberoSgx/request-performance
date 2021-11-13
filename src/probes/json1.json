@@ -1,0 +1,99 @@
+
+{
+  "stats": {
+    "https://api.stg.findluca.com/version": {
+      "errorRatio": 0,
+      "average": {
+        "time_connect": 0.328325,
+        "time_starttransfer": 0.825496,
+        "time_total": 0.825682,
+        "time_appconnect": 0.662912,
+        "time_namelookup": 0.16567,
+        "time_pretransfer": 0.662987,
+        "time_redirect": 0,
+        "num_connects": 1,
+        "num_redirects": 0,
+        "speed_download": 24,
+        "speed_upload": 0
+      },
+      "median": {
+        "time_connect": 0.328325,
+        "time_starttransfer": 0.825496,
+        "time_total": 0.825682,
+        "time_appconnect": 0.662912,
+        "time_namelookup": 0.16567,
+        "time_pretransfer": 0.662987,
+        "time_redirect": 0,
+        "num_connects": 1,
+        "num_redirects": 0,
+        "speed_download": 24,
+        "speed_upload": 0
+      }
+    },
+    "https://api.prod.cloud.findmotto.com/version": {
+      "errorRatio": 0,
+      "average": {
+        "time_connect": 0.260817,
+        "time_starttransfer": 0.819063,
+        "time_total": 0.819248,
+        "time_appconnect": 0.579202,
+        "time_namelookup": 0.110656,
+        "time_pretransfer": 0.579345,
+        "time_redirect": 0,
+        "num_connects": 1,
+        "num_redirects": 0,
+        "speed_download": 24,
+        "speed_upload": 0
+      },
+      "median": {
+        "time_connect": 0.260817,
+        "time_starttransfer": 0.819063,
+        "time_total": 0.819248,
+        "time_appconnect": 0.579202,
+        "time_namelookup": 0.110656,
+        "time_pretransfer": 0.579345,
+        "time_redirect": 0,
+        "num_connects": 1,
+        "num_redirects": 0,
+        "speed_download": 24,
+        "speed_upload": 0
+      }
+    }
+  },
+  "results": {
+    "https://api.stg.findluca.com/version": [
+      {
+        "time_connect": 0.328325,
+        "time_starttransfer": 0.825496,
+        "time_total": 0.825682,
+        "time_appconnect": 0.662912,
+        "time_namelookup": 0.16567,
+        "time_pretransfer": 0.662987,
+        "time_redirect": 0,
+        "num_connects": 1,
+        "num_redirects": 0,
+        "speed_download": 24,
+        "speed_upload": 0,
+        "cmd": "curl -o /dev/null -H 'Cache-Control: no-cache' -s -w '{ \"time_connect\": %{time_connect}, \"time_starttransfer\": %{time_starttransfer}, \"time_total\": %{time_total}, \"time_appconnect\": %{time_appconnect}, \"time_namelookup\": %{time_namelookup}, \"time_pretransfer\": %{time_pretransfer}, \"time_redirect\": %{time_redirect}, \"num_connects\": %{num_connects}, \"num_redirects\": %{num_redirects}, \"speed_download\": %{speed_download}, \"speed_upload\": %{speed_upload} }' https://api.stg.findluca.com/version",
+        "realUrl": "https://api.stg.findluca.com/version"
+      }
+    ],
+    "https://api.prod.cloud.findmotto.com/version": [
+      {
+        "time_connect": 0.260817,
+        "time_starttransfer": 0.819063,
+        "time_total": 0.819248,
+        "time_appconnect": 0.579202,
+        "time_namelookup": 0.110656,
+        "time_pretransfer": 0.579345,
+        "time_redirect": 0,
+        "num_connects": 1,
+        "num_redirects": 0,
+        "speed_download": 24,
+        "speed_upload": 0,
+        "cmd": "curl -o /dev/null -H 'Cache-Control: no-cache' -s -w '{ \"time_connect\": %{time_connect}, \"time_starttransfer\": %{time_starttransfer}, \"time_total\": %{time_total}, \"time_appconnect\": %{time_appconnect}, \"time_namelookup\": %{time_namelookup}, \"time_pretransfer\": %{time_pretransfer}, \"time_redirect\": %{time_redirect}, \"num_connects\": %{num_connects}, \"num_redirects\": %{num_redirects}, \"speed_download\": %{speed_download}, \"speed_upload\": %{speed_upload} }' https://api.prod.cloud.findmotto.com/version",
+        "realUrl": "https://api.prod.cloud.findmotto.com/version"
+      }
+    ]
+  }
+}

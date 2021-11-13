@@ -18,6 +18,7 @@
   "author": "Sebastián Gurin",
   "license": "MIT",
   "dependencies": {
+    "jsx-alone-string": "0.0.4",
     "minimist": "^1.2.5",
     "misc-utils-of-mine-generic": "^0.2.38",
     "p-queue": "^7.1.0"

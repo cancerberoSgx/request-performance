@@ -9,7 +9,9 @@
     "noImplicitAny": false,
     "sourceMap": false,
     "moduleResolution": "node",
-    "outDir": "dist"
+    "outDir": "dist",
+    "jsx": "react",
+    "jsxFactory": "JSXAlone.createElement"
   },
   "compileOnSave": false,
   "include": [

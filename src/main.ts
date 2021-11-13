@@ -76,5 +76,5 @@ export async function main(config: MainConfig) {
 
     });
   });
-  return { results, stats };
+  return { stats, results };
 }

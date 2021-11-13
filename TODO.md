@@ -6,6 +6,8 @@
  * web client / html generation for reports
  * collect more info like status code, response body
  * enable url headers as input
+ * show output examples in readme
+ * skip come metrics (separate comma arg --skip - default all)
 
 ## UX TODO: 
 
@@ -14,7 +16,8 @@ request-performance --url a.com --url b.com --report html --reportOutput run1.ht
 ## html TODO: 
 
  * i want to see how many request each url has tested with
- * a playground where I can run tests indefinetly and stats and charts are updated periodically. 
+ * a playground where I can run tests indefinitely and stats and charts are updated periodically. 
+ * charts comparing request timings over time. user can select which info and for each url a line is drawn in time.
 
 ## cli TODO: 
 
