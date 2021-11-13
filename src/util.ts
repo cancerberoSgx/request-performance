@@ -5,7 +5,7 @@ export function counter() {
 /**
  * adds a parameter named `param` with a value that tries to be unique. The intending behavior is to add a "nocache" parameter
  */
-export function addUniqueParameter(url: string, param: string) {
+export function addUniqueParam(url: string, param: string) {
   const value = `${counter()+Math.random()}`//.replace(/\./g, '')
   if (url.includes('?')) {
     return `${url}&${param}=${value}`;
@@ -24,3 +24,9 @@ export const median = (arr: number[]) => {
     nums = [...arr].sort((a, b) => a - b);
   return arr.length % 2 !== 0 ? nums[mid] : (nums[mid - 1] + nums[mid]) / 2;
 };
+
+
+export function messageAndExit(status: number, msg: string) {
+  console.log(msg);
+  process.exit(status);
+}

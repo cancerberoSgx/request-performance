@@ -1,4 +1,4 @@
-import { addUniqueParameter } from "./util";
+import { addUniqueParam } from "./util";
 
 interface CurlInfo {
   id: string
@@ -13,21 +13,41 @@ export const curlInfo: CurlInfo[] = [
     id: 'time_starttransfer'
   }, {
     id: 'time_total'
+  }, {
+    id: 'time_appconnect'
+  }, {
+    id: 'time_namelookup'
+  }, {
+    id: 'time_pretransfer'
+  }, {
+    id: 'time_redirect'
+  },
+  {
+    id: 'num_connects'
+  }, {
+    id: 'num_redirects'
+  }, {
+    id: 'speed_download'
+  }, {
+    id: 'speed_upload'
   },
 ]
 export interface CurlResult {
   time_connect: number
   time_starttransfer: number
   time_total: number
+  time_appconnect: number
+  time_namelookup: number
+  time_pretransfer: number
+  time_redirect: number
 }
 
 interface BuildCommandConfig {
   url: string;
-  /** if given it will add a url parameter with `uniqueParameter` name and random number to avoid url caching */
-  uniqueParameter?: string;
+  /** if given it will add a url parameter with `uniqueParam` name and random number to avoid url caching */
+  uniqueParam?: string;
 }
 export const buildCommand = (config: BuildCommandConfig) => {
-  const url = config.uniqueParameter ? addUniqueParameter(config.url, config.uniqueParameter) : config.url;
   const cmd = `curl -o /dev/null -H 'Cache-Control: no-cache' -s ` +
     `-w '{ ${curlInfo.map(info => `"${info.name || info.id}": %{${info.id}}`).join(', ')} }' ` +
     config.url;

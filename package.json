@@ -3,6 +3,9 @@
   "version": "0.0.1",
   "description": "Uses curl to extract connection timings from given urls, stats, and comparison reports.",
   "main": "dist/index.js",
+  "bin": {
+    "request-performance": "./bin/bin.js"
+  },
   "scripts": {
     "prepare": "npm run build",
     "clean": "rm -fr dist/",
