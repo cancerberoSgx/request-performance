@@ -1,0 +1,16 @@
+node_modules
+tmp
+spec
+src
+dist/spec
+tsconfig.json
+.vscode
+*.tgz
+api
+.travis.yml
+formatCodeSettings.json
+dist/**/__tests__
+tmp*
+/playground
+/samples
+notes.md

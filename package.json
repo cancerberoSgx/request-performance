@@ -1,0 +1,33 @@
+{
+  "name": "request-performance",
+  "version": "0.0.1",
+  "description": "Uses curl to extract connection timings from given urls, stats, and comparison reports.",
+  "main": "dist/index.js",
+  "scripts": {
+    "prepare": "npm run build",
+    "clean": "rm -fr dist/",
+    "build-ts": "tsc",
+    "build": "npm run clean && npm run build-ts",
+    "test": "npm run build && npx jest --testPathIgnorePatterns /dist/",
+    "test-js": "npm run build && npx jest --testMatch \"**/__tests__/**/*.js\"",
+    "test-watch": "npm test -- --watch"
+  },
+  "author": "Sebastián Gurin",
+  "license": "MIT",
+  "dependencies": {
+    "minimist": "^1.2.5",
+    "misc-utils-of-mine-generic": "^0.2.38",
+    "p-queue": "^7.1.0"
+  },
+  "devDependencies": {
+    "@types/jest": "^26.0.9",
+    "@types/node": "^14.0.27",
+    "jest": "^26.2.2",
+    "ts-jest": "^26.1.4",
+    "ts-node": "^10.1.0",
+    "typescript": "^4.3.5"
+  },
+  "jest": {
+    "preset": "ts-jest"
+  }
+}

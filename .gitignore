@@ -1,0 +1,8 @@
+node_modules/
+.idea/
+docs/
+.env
+dist/
+.DS_Store
+tmp*
+.parcel-cache
