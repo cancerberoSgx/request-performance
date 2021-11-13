@@ -1,5 +1,7 @@
+import { writeFileSync } from "fs";
 import { asyncMap, parseJSON } from "misc-utils-of-mine-generic";
 import { buildCommand, curlInfo, CurlResult } from "./command";
+import { buildHtml } from "./report/html";
 import { addUniqueParam, average, exec, median } from "./util";
 
 export interface MainConfig {
@@ -11,6 +13,12 @@ export interface MainConfig {
   timeAmount?: number
   /** if given it will add a url parameter with `uniqueParam` name and random number to avoid url caching */
   uniqueParam?: string
+  /** Default json */
+  report?: 'json' | 'html'
+  /** file where to store the report. If not give it will print to stdout */
+  reportOutput?: string
+  /** if given it won't run the test just build a --report from provided json file */
+  reportInput?: string
 }
 interface CallResult {
   error?: string
@@ -23,7 +31,6 @@ export interface MainResult {
   results: {
     [url: string]: CallResult[]
   }
-  realUrl: string
   stats: {
     [url: string]: Stats
   }
@@ -33,6 +40,13 @@ export async function main(config: MainConfig) {
   config.urls = config.urls || [];
   config.concurrency = config.concurrency || 1;
   config.timeAmount = config.timeAmount || 1000;
+  console.log('main config', JSON.stringify(config, null, 2));
+  const result: MainResult = await runTest(config);
+  handleReports(config, result)
+  return result;
+}
+
+async function runTest(config: MainConfig) {
   setTimeout(() => {
     finished = true;
   }, config.timeAmount || 500);
@@ -51,12 +65,12 @@ export async function main(config: MainConfig) {
         return { url, result, cmd, realUrl };
       } catch (error) {
         console.log('ERROR', error);
-        return { url, error: error + '', cmd, realUrl  };
+        return { url, error: error + '', cmd, realUrl };
       }
     });
     urlResults.forEach(r => {
       results[r.url] = results[r.url] || [];
-      results[r.url].push({...(r.error ? {error: r.error} : r.result), cmd: r.cmd, realUrl: r.realUrl});
+      results[r.url].push({ ...(r.error ? { error: r.error } : r.result), cmd: r.cmd, realUrl: r.realUrl });
     });
   }
   const stats: { [url: string]: Stats; } = {};
@@ -66,8 +80,6 @@ export async function main(config: MainConfig) {
     stats[url].errorRatio = (results[url].length - noErrors.length) / results[url].length;
     curlInfo.forEach(info => {
       const values = noErrors.map(e => e[info.id]);
-
-      stats
       stats[url]['average'] = stats[url]['average'] || {} as CurlResult;
       stats[url]['average'][info.id] = average(values);
 
@@ -77,4 +89,21 @@ export async function main(config: MainConfig) {
     });
   });
   return { stats, results };
+}
+
+function handleReports(config: MainConfig, result: MainResult) {
+  config.report = config.report || 'json'
+  let output: string
+  if (config.report === 'json') {
+    output = JSON.stringify(result, null, 2)
+  }
+  if (config.report === 'html') {
+    output = buildHtml(result)
+  }
+
+  if (config.reportOutput) {
+    writeFileSync(config.reportOutput, output)
+  } else {
+    console.log(output)
+  }
 }
