@@ -1,1 +1,1 @@
-alert(data)
+console.log(data)

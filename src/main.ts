@@ -1,4 +1,4 @@
-import { writeFileSync } from "fs";
+import { readFileSync, writeFileSync } from "fs";
 import { asyncMap, parseJSON } from "misc-utils-of-mine-generic";
 import { buildCommand, curlInfo, CurlResult } from "./command";
 import { buildHtml } from "./report/html";
@@ -25,7 +25,8 @@ interface CallResult {
   result?: CurlResult
 }
 
-type Stats = { [stat: string]: CurlResult } & { errorRatio: number }
+export type Stats = { [stat: string]: CurlResult } & { errorRatio: number }
+export const TimingStatsNames = ['average', 'median']
 
 export interface MainResult {
   results: {
@@ -40,8 +41,13 @@ export async function main(config: MainConfig) {
   config.urls = config.urls || [];
   config.concurrency = config.concurrency || 1;
   config.timeAmount = config.timeAmount || 1000;
-  console.log('main config', JSON.stringify(config, null, 2));
-  const result: MainResult = await runTest(config);
+  // console.log('main config', JSON.stringify(config, null, 2));
+  let result: MainResult
+  if (config.reportInput) {
+    result = JSON.parse(readFileSync(config.reportInput).toString())
+  } else {
+    result = await runTest(config);
+  }
   handleReports(config, result)
   return result;
 }
