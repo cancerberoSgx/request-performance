@@ -14,11 +14,11 @@ export function buildHtml(data: MainResult) {
       // `<style>${readFileSync(`${__dirname}/../../node_modules/chartist/dist/chartist.min.css`).toString()}</style>`+
       `<style>${cssTemplate}</style>`
     }
-    else if (l.includes('$%$&replace_me_with_json$%$&')) {
-      return `<script>
-      window.data = ${JSON.stringify(data)}
-      </script>`
-    }
+    // else if (l.includes('$%$&replace_me_with_json$%$&')) {
+    //   return `<script>
+    //   window.data = ${JSON.stringify(data)}
+    //   </script>`
+    // }
     else if (l.includes('$%$&replace_me_with_html$%$&')) {
       const html = JSXAlone.render(<Main data={data} />)
       return html

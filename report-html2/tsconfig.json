@@ -11,7 +11,8 @@
     "moduleResolution": "node",
     "outDir": "dist",
     "jsx": "react",
-    "esModuleInterop": false
+    "esModuleInterop": true,
+    "resolveJsonModule": true
   },
   "compileOnSave": false,
   "include": [

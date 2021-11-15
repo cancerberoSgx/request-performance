@@ -1,5 +1,3 @@
-import { addUniqueParam } from "./util";
-
 interface CurlInfo {
   id: string
   name?: string

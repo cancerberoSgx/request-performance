@@ -3,14 +3,13 @@
 import { execSync } from "child_process"
 import { readFileSync, writeFileSync } from "fs"
 import { resolve } from "path"
-// import {exec} from '../../src/util'
 const dataGlobal = 'resultsData'
-// Should generate a fully local-runable html file
+
 interface Config {
   data: string
   reportOutput?: string
 }
-export async function main(config: Config) {
+export async function html2Build(config: Config) {
   const cwd = resolve(`${__dirname}/..`)
   execSync(`rm -rf dist`, { cwd })
   // TODO: we are always compiling src for debug
@@ -48,9 +47,12 @@ export async function main(config: Config) {
 
 
 ; (async () => {
-  const result = await main({
-    data: JSON.parse(readFileSync('../src/probes/json1.json').toString()),
-    reportOutput: 'tmp_seba.html'
+  var args = require('minimist')(process.argv.slice(2));
+
+  const result = await html2Build({
+    data: JSON.parse(readFileSync(args.reportInput).toString()),
+    reportOutput: args.reportOutput
+    // data: JSON.parse(readFileSync('../src/probes/json1.json').toString()),
+    // reportOutput: 'tmp_seba.html'
   })
-  console.log(result);
 })();

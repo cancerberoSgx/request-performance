@@ -1,5 +1,7 @@
+import { execSync } from "child_process";
 import { readFileSync, writeFileSync } from "fs";
 import { asyncMap, parseJSON } from "misc-utils-of-mine-generic";
+import { resolve } from "path";
 import { buildCommand, curlInfo, CurlResult } from "./command";
 import { buildHtml } from "./report/html";
 import { addUniqueParam, average, exec, median } from "./util";
@@ -14,7 +16,7 @@ export interface MainConfig {
   /** if given it will add a url parameter with `uniqueParam` name and random number to avoid url caching */
   uniqueParam?: string
   /** Default json */
-  report?: 'json' | 'html'
+  report?: 'json' | 'html' | 'html2'
   /** file where to store the report. If not give it will print to stdout */
   reportOutput?: string
   /** if given it won't run the test just build a --report from provided json file */
@@ -48,7 +50,7 @@ export async function main(config: MainConfig) {
   } else {
     result = await runTest(config);
   }
-  handleReports(config, result)
+  await handleReports(config, result)
   return result;
 }
 
@@ -97,7 +99,7 @@ async function runTest(config: MainConfig) {
   return { stats, results };
 }
 
-function handleReports(config: MainConfig, result: MainResult) {
+async function handleReports(config: MainConfig, result: MainResult) {
   config.report = config.report || 'json'
   let output: string
   if (config.report === 'json') {
@@ -105,6 +107,9 @@ function handleReports(config: MainConfig, result: MainResult) {
   }
   if (config.report === 'html') {
     output = buildHtml(result)
+  }
+  if (config.report === 'html2') {
+    execSync('npx ts-node src/build.ts', {cwd: resolve(`${__dirname}/../report-html2`)})
   }
 
   if (config.reportOutput) {
