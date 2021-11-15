@@ -8,21 +8,26 @@ export function buildHtml(data: MainResult) {
   const jsTemplate = readFileSync('src/report/html/report.js').toString()
   const cssTemplate = readFileSync('src/report/html/report.css').toString()
 
-  const result = htmlTemplate.split('\n').map(l=>{
-    if(l.includes('$%$&replace_me_with_styles$%$& ')) {
-      return `<style>${cssTemplate}</style>`
-    } 
-    else if(l.includes('$%$&replace_me_with_json$%$&')) {
+  const result = htmlTemplate.split('\n').map(l => {
+    if (l.includes('$%$&replace_me_with_styles$%$& ')) {
+      return ``+
+      // `<style>${readFileSync(`${__dirname}/../../node_modules/chartist/dist/chartist.min.css`).toString()}</style>`+
+      `<style>${cssTemplate}</style>`
+    }
+    else if (l.includes('$%$&replace_me_with_json$%$&')) {
       return `<script>
       window.data = ${JSON.stringify(data)}
       </script>`
     }
-    else if(l.includes('$%$&replace_me_with_html$%$&')) {
-      const html = JSXAlone.render(<Main data={data}/>)
+    else if (l.includes('$%$&replace_me_with_html$%$&')) {
+      const html = JSXAlone.render(<Main data={data} />)
       return html
     }
-    else if(l.includes('$%$&replace_me_with_js$%$&')) {
-      return `<script>${jsTemplate}</script>`
+    else if (l.includes('$%$&replace_me_with_js$%$&')) {
+      return ``+
+      // `<script>${readFileSync(`${__dirname}/../../node_modules/chartist/dist/chartist.min.js`).toString()}</script>`+
+      `<script>${readFileSync(`${__dirname}/../../node_modules/chart.js/dist/chart.min.js`).toString()}</script>`+
+      `<script>${jsTemplate}</script>`
     }
     else {
       return l

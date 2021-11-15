@@ -11,17 +11,18 @@ export const Main = (props: P) => {
 
   return <article>
     <h1>Comparing {urls.join(', ')}</h1>
-    <h2></h2>
     {urls.map(url => <div>
+      <h2>{url}</h2>
       <InfoTable {...props} url={url}></InfoTable>
       <ValuesTable {...props} url={url}></ValuesTable>
+      <br/><br/><br/>
     </div>)}
   </article>
 }
 
 const ValuesTable = (props: P & { url: string }) => {
   return <section>
-    <h4>Requests for {props.url}</h4>
+    <h4>Requests</h4>
     <table>
       <thead>
         <tr>
@@ -35,23 +36,24 @@ const ValuesTable = (props: P & { url: string }) => {
         )}
       </tbody>
     </table>
+    <div data-url={props.url} className="valueChart"/>
   </section>
 }
 
 const InfoTable = (props: P & { url: string }) => {
   return <section>
-    <h4>Stats for {props.url}</h4>
-    <p>Error Ratio: {props.data.stats[props.url].errorRatio + ''}</p>
+    <h4>Stats</h4>
     <table>
       <thead>
         <tr>
-          {curlInfo.map(info => <th>{info.name || info.id}</th>)}
+          {[{id: ''}, {id: 'error_ratio'}, ...curlInfo].map(info => <th>{info!.name || info.id}</th>)}
         </tr>
       </thead>
       <tbody>
         {TimingStatsNames.map(statName =>
           <tr>
             <td><strong>{statName}</strong></td>
+            <td><strong>{props.data.stats[props.url].errorRatio + ''}</strong></td>
             {curlInfo.map(info =>
               <td>{props.data.stats[props.url][statName][info.id]}</td>
             )}

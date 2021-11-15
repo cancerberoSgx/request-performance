@@ -8,6 +8,7 @@
   },
   "scripts": {
     "prepare": "npm run build",
+    "install-reports-deps": "cd src/report/html2; npm i",
     "clean": "rm -fr dist/",
     "build-ts": "tsc",
     "build": "npm run clean && npm run build-ts",
@@ -18,10 +19,12 @@
   "author": "Sebastián Gurin",
   "license": "MIT",
   "dependencies": {
+    "chartist": "^0.11.4",
     "jsx-alone-string": "0.0.4",
     "minimist": "^1.2.5",
     "misc-utils-of-mine-generic": "^0.2.38",
-    "p-queue": "^7.1.0"
+    "p-queue": "^7.1.0",
+    "parcel": "^2.0.1"
   },
   "devDependencies": {
     "@types/jest": "^26.0.9",
