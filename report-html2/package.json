@@ -8,7 +8,8 @@
     "clean": "rm -fr dist/",
     "build-ts": "tsc",
     "build": "npm run clean && npm run build-ts",
-    "start": "parcel src/html2.html"
+    "start": "parcel src/html2.html",
+    "debug": "npx parcel src/html2Debug.html"
   },
   "author": "Sebastián Gurin",
   "license": "MIT",
