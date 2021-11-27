@@ -1,10 +1,10 @@
 import { execSync } from "child_process";
 import { readFileSync, writeFileSync } from "fs";
-import { asyncMap, parseJSON } from "misc-utils-of-mine-generic";
+import { addUniqueParam, asyncMap, average, median, parseJSON } from "misc-utils-of-mine-generic";
 import { resolve } from "path";
 import { buildCommand, curlInfo, CurlResult } from "./command";
 import { buildHtml } from "./report/html";
-import { addUniqueParam, average, exec, median } from "./util";
+import { exec } from "./util";
 
 export interface MainConfig {
   /** urls will be tested in order, serially. If more than one is provided */
